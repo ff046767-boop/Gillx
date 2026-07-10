@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GillX Whitelist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #cbfc14; /* Lime Green */
+            --text-dark: #1e1e1e;
+            --glass-bg: rgba(255, 255, 255, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+            --teal: #30d5c8;
+            --pink: #ff4db8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Glassmorphism Effect */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Header Area */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            margin: 20px 40px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 24px;
+        }
+
+        .logo-area img {
+            height: 40px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        .btn-waitlist {
+            background-color: var(--teal);
+            border: 2px solid var(--text-dark);
+            color: var(--text-dark);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: transform 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .btn-waitlist:hover {
+            transform: scale(1.05);
+        }
+
+        /* Main Responsive Container */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 40px;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Left Panel - NFT Card */
+        .nft-showcase {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 500px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nft-image {
+            width: 80%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.15));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .badge {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            white-space: nowrap;
+        }
+
+        .badge-1 {
+            top: 40%;
+            left: -20px;
+        }
+
+        .badge-2 {
+            bottom: 15%;
+            right: -20px;
+            text-align: right;
+        }
+
+        /* Right Panel - Form */
+        .whitelist-form {
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .whitelist-form h1 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .whitelist-form p.subtitle {
+            font-size: 15px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .step-group {
+            margin-bottom: 20px;
+        }
+
+        .step-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .step-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 12px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.8);
+            gap: 10px;
+        }
+
+        .step-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .step-info i {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .fa-x-twitter { color: #000; }
+        .fa-discord { color: #5865F2; }
+        .fa-wallet { color: #333; }
+
+        .btn-step {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--pink);
+            background: rgba(255,255,255,0.5);
+            color: var(--text-dark);
+            transition: all 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .btn-step:hover {
+            background: var(--pink);
+            color: white;
+        }
+
+        .btn-teal {
+            background: var(--teal);
+            border: 1px solid var(--text-dark);
+        }
+        
+        .btn-teal:hover {
+            background: #25b8ad;
+            color: var(--text-dark);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            margin-top: 20px;
+            border-radius: 30px;
+            border: 2px solid var(--text-dark);
+            background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%);
+            color: var(--text-dark);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        footer {
+            text-align: right;
+            padding: 20px 40px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        footer span {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        /* =================================================== */
+        /* RESPONSIVE MEDIA QUERIES (Mobile & Tablet Layout)  */
+        /* =================================================== */
+        
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column; /* Mobile မှာ ပုံနဲ့ Form ကို အပေါ်အောက် စီပေးခြင်း */
+                gap: 40px;
+                padding: 20px;
+            }
+            nav {
+                display: none; /* ဖုန်းမျက်နှာပြင်မှာ စာသား Menu များကို ခေတ္တဖျောက်ထားခြင်း */
+            }
+            header {
+                margin: 15px 20px;
+                padding: 12px 24px;
+            }
+            .logo-area {
+                font-size: 20px;
+            }
+            .logo-area img {
+                height: 32px;
+            }
+            .btn-waitlist {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
+            .nft-showcase {
+                height: 400px; /* Tablet/Mobile အတွက် အမြင့်ကို အနည်းငယ်လျှော့ချခြင်း */
+            }
+            .badge-1 {
+                left: 0px;
+            }
+            .badge-2 {
+                right: 0px;
+            }
+            .whitelist-form {
+                padding: 30px;
+            }
+            .whitelist-form h1 {
+                font-size: 28px;
+            }
+            footer {
+                text-align: center;
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                margin: 10px;
+                padding: 10px 16px;
+                border-radius: 40px;
+            }
+            .logo-area span {
+                font-size: 18px;
+            }
+            .nft-showcase {
+                height: 340px; /* ဖုန်းအသေးစားများအတွက် ပုံအရွယ်အစား ထပ်ညှိခြင်း */
+            }
+            .badge {
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+            .whitelist-form {
+                padding: 20px;
+            }
+            .whitelist-form h1 {
+                font-size: 24px;
+            }
+            .step-box {
+                padding: 10px 14px;
+            }
+            .step-info {
+                gap: 10px;
+                font-size: 13px;
+            }
+            .btn-step {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="glass">
+        <div class="logo-area">
+            <img src="1000053523.png" alt="GillX Logo">
+            <span>GillX</span>
+        </div>
+        <nav>
+            <a href="#">Whitelist</a>
+            <a href="#">Story</a>
+            <a href="#">FAQ</a>
+            <a href="#">Community</a>
+        </nav>
+        <button class="btn-waitlist">Join Waitlist</button>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="nft-showcase glass">
+            <div class="badge badge-1">GILLX #2025</div>
+            <img src="1000053348.jpg" alt="GillX NFT" class="nft-image">
+            <div class="badge badge-2">LIMITED<br>WL SPOTS</div>
+        </div>
+
+        <div class="whitelist-form glass">
+            <h1>Join the GillX Whitelist</h1>
+            <p class="subtitle">Complete the tasks below to secure your spot for the mint.</p>
+
+            <div class="step-group">
+                <span class="step-title">Step 1: CONNECT X (TWITTER)</span>
+                <div class="step-box">
+                    <div class="step-info">
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <span>X ID connected: @user</span>
+                    </div>
+                    <button class="btn-step">VERIFY</button>
+                </div>
+            </div>
+
+            <div class="step-group">
+                <span class="step-title">Step 2: CONNECT DISCORD</span>
+                <div class="step-box">
+                    <div class="step-info">
+                        <i class="fa-brands fa-discord"></i>
+                        <span>@user connected</span>
+                    </div>
+                    <button class="btn-step">JOIN & VERIFY</button>
+                </div>
+            </div>
+
+            <div class="step-group">
+                <span class="step-title">Step 3: WALLET ADDRESS</span>
+                <div class="step-box">
+                    <div class="step-info">
+                        <i class="fa-solid fa-wallet"></i>
+                        <span>0x...a1b2c3d4</span>
+                    </div>
+                    <button class="btn-step btn-teal">CONFIRM</button>
+                </div>
+            </div>
+
+            <button class="btn-submit">Submit Registration</button>
+        </div>
+
+    </div>
+
+    <footer>
+        <span>TERMS & CONDITIONS</span>
+        <span>CONTACT</span>
+    </footer>
+
+</body>
+</html>
